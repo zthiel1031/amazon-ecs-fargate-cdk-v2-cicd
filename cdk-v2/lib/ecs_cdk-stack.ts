@@ -118,12 +118,12 @@ export class EcsCdkStack extends cdk.Stack {
 
 
     const gitHubSource = codebuild.Source.gitHub({
-      owner: githubUserName.valueAsString,
-      repo: githubRepository.valueAsString,
-      webhook: true, // optional, default: true if `webhookfilteres` were provided, false otherwise
+      owner: zthiel1031,
+      repo: amazon-ecs-fargate-cdk-v2-cicd,
+      webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
       webhookFilters: [
         codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('main'),
-      ], // optional, by default all pushes and pull requests will trigger a build
+      ], // optional, by default all pushes and Pull Requests will trigger a build
     });
 
     // codebuild - project
@@ -192,11 +192,12 @@ export class EcsCdkStack extends cdk.Stack {
     const buildOutput = new codepipeline.Artifact();
     const nameOfGithubPersonTokenParameterAsString = githubPersonalTokenSecretName.valueAsString
     const sourceAction = new codepipeline_actions.GitHubSourceAction({
-      actionName: 'github_source',
-      owner: githubUserName.valueAsString,
-      repo: githubRepository.valueAsString,
+      actionName: GitHub_Source,
+      owner: zthiel1031,
+      repo: amazon-ecs-fargate-cdk-v2-cicd,
       branch: 'main',
-      oauthToken: cdk.SecretValue.secretsManager(nameOfGithubPersonTokenParameterAsString),
+      oauthToken: cdk.SecretValue.secretsManager("/my/github/token"),
+      //oauthToken: cdk.SecretValue.plainText('<plain-text>'),
       output: sourceOutput
     });
 
