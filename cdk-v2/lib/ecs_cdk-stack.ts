@@ -118,8 +118,8 @@ export class EcsCdkStack extends cdk.Stack {
 
 
     const gitHubSource = codebuild.Source.gitHub({
-      owner: zthiel1031,
-      repo: amazon-ecs-fargate-cdk-v2-cicd,
+      owner: 'zthiel1031',
+      repo: 'amazon-ecs-fargate-cdk-v2-cicd',
       webhook: true, // optional, default: true if `webhookFilteres` were provided, false otherwise
       webhookFilters: [
         codebuild.FilterGroup.inEventOf(codebuild.EventAction.PUSH).andBranchIs('main'),
@@ -192,9 +192,9 @@ export class EcsCdkStack extends cdk.Stack {
     const buildOutput = new codepipeline.Artifact();
     const nameOfGithubPersonTokenParameterAsString = githubPersonalTokenSecretName.valueAsString
     const sourceAction = new codepipeline_actions.GitHubSourceAction({
-      actionName: GitHub_Source,
-      owner: zthiel1031,
-      repo: amazon-ecs-fargate-cdk-v2-cicd,
+      actionName: 'GitHub_Source',
+      owner: 'zthiel1031',
+      repo: 'amazon-ecs-fargate-cdk-v2-cicd',
       branch: 'main',
       oauthToken: cdk.SecretValue.secretsManager("/my/github/token"),
       //oauthToken: cdk.SecretValue.plainText('<plain-text>'),
